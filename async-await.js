@@ -29,3 +29,5 @@ const fetchStarwars = async () => {
 // dialect = postgres
 // remove username and password
 // database = the name of database
+
+// sequelize db:create will create the db under db in config.
