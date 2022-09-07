@@ -23,4 +23,9 @@ const fetchStarwars = async () => {
 
 // try {} catch() {} is like if else.
 
-fetchStarwars()
+// fetchStarwars()
+
+// CONFIG NOTES FOR SEQUELIZE
+// dialect = postgres
+// remove username and password
+// database = the name of database
