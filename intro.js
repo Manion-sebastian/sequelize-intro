@@ -5,6 +5,13 @@ const db = require('./models')
 const userCRUD = async () => {
     try {
         // CREATE 
+        const newUser = await db.user.create({
+            firstName: 'Loebita',
+            lastName: 'Fawk',
+            age: 42,
+            email: 'ddaw@b.com'
+        })
+        console.log(newUser)
         // READ
         // UPDATE
         // DESTROY
@@ -12,3 +19,5 @@ const userCRUD = async () => {
         console.warn(err)
     }
 }
+
+userCRUD()
