@@ -20,9 +20,22 @@ const userCRUD = async () => {
         //         firstName: 'Sebastian'
         //     }
         // })
-        console.log(someUsers)
+        // console.log(someUsers)
         // UPDATE
+        // update({want to update}, {what were searching for})
+        // const numRowsChanged = await db.user.update({ email: 'newEmail@b.com'}, {
+        //     where : {
+        //         firstName: 'Sebastian'
+        //     }
+        // })
+        // console.log(numRowsChanged)
         // DESTROY
+        const destroyUser = await db.user.destroy({
+            where: {
+                firstName: 'Uria'
+            }
+        })
+        console.log(destroyUser)
     } catch(err) {
         console.warn(err)
     }
