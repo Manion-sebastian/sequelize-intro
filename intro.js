@@ -21,6 +21,27 @@ const userCRUD = async () => {
         //     }
         // })
         // console.log(someUsers)
+
+        // find or create
+        // array destructuring syntax
+        // user = array[0] -- the user that is found or created
+        // created = array[1] -- a bool of whether the user was created (true = created, false = found)
+        const [user, created] = await db.user.findOrCreate({
+            where: {
+                firstName: 'Laura'
+            },
+            // data to add if we are creating
+            defaults: {
+                lastName: 'Gold',
+                age: 32,
+                email: 'w41@b.com'
+            }
+        })
+
+        console.log(user)
+        console.log(`the user was created: ${created}`)
+
+
         // UPDATE
         // update({want to update}, {what were searching for})
         // const numRowsChanged = await db.user.update({ email: 'newEmail@b.com'}, {
@@ -30,12 +51,12 @@ const userCRUD = async () => {
         // })
         // console.log(numRowsChanged)
         // DESTROY
-        const destroyUser = await db.user.destroy({
-            where: {
-                firstName: 'Uria'
-            }
-        })
-        console.log(destroyUser)
+        // const destroyUser = await db.user.destroy({
+        //     where: {
+        //         firstName: 'Uria'
+        //     }
+        // })
+        // console.log(destroyUser)
     } catch(err) {
         console.warn(err)
     }
