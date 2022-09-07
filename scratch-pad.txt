@@ -1,0 +1,13 @@
+create model which are singular -- will be pluralized.
+model(table): user
+-----------------
+firstName: TEXT
+lastName: TEXT
+age: INT
+email: TEXT
+
+note: generate models with a SINGULAR name
+
+this command will make the table.
+
+sequelize model:create --name user --attributes firstName:string,lastName:string,age:integer,email:string
