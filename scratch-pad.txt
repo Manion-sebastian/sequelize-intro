@@ -42,3 +42,20 @@ DATABASE GUIDELINES:
 when creating a table that will reference another table use parentId
 
 sequelize model:create --name pet --attributes name:string,species:string,description:text,userId:integer
+
+
+TABLE: toys
+----------
+type: VARCHAR
+color: VARCHAR
+
+sequelize model:create --name toy --attributes type:string,color:string
+
+NOTE: join tables should be left pluralized
+
+JOIN TABLE: pets_toys
+---------------------
+FK: petId: INT
+FK: toyId: INT
+
+sequelize model:create --name pets_toys --attributes petId:integer,toyId:integer
