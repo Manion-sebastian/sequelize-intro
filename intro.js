@@ -5,12 +5,12 @@ const db = require('./models')
 const userCRUD = async () => {
     try {
         // CREATE 
-        // const newUser = await db.user.create({
-        //     firstName: 'Loebita',
-        //     lastName: 'Fawk',
-        //     age: 42,
-        //     email: 'ddaw@b.com'
-        // })
+        const newUser = await db.user.create({
+            firstName: 'Loebita',
+            lastName: 'Fawk',
+            age: 42,
+            email: 'ddaw@b.com'
+        })
         // console.log(newUser)
         // READ
         // const allUsers = await db.user.findAll()
@@ -26,20 +26,20 @@ const userCRUD = async () => {
         // array destructuring syntax
         // user = array[0] -- the user that is found or created
         // created = array[1] -- a bool of whether the user was created (true = created, false = found)
-        const [user, created] = await db.user.findOrCreate({
-            where: {
-                firstName: 'Laura'
-            },
-            // data to add if we are creating
-            defaults: {
-                lastName: 'Gold',
-                age: 32,
-                email: 'w41@b.com'
-            }
-        })
+        // const [user, created] = await db.user.findOrCreate({
+        //     where: {
+        //         firstName: 'Laura'
+        //     },
+        //     // data to add if we are creating
+        //     defaults: {
+        //         lastName: 'Gold',
+        //         age: 32,
+        //         email: 'w41@b.com'
+        //     }
+        // })
 
-        console.log(user)
-        console.log(`the user was created: ${created}`)
+        // console.log(user)
+        // console.log(`the user was created: ${created}`)
 
 
         // UPDATE
@@ -62,4 +62,74 @@ const userCRUD = async () => {
     }
 }
 
-userCRUD()
+// userCRUD()
+async function newPet() {
+    try {
+        const user = await db.user.findOne({
+            where: {
+                firstName: 'Weston'
+            }
+        })
+
+        const newPet = await user.createPet({
+            name: 'Shibe',
+            species: 'Heckin Chonker'
+        })
+        console.log(newPet)
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+// newPet()
+
+async function associatePets() {
+    try {
+        const options = {
+            where: {
+                name: 'Simba',
+                species: 'Ginger Cat'
+            },
+            defaults: {
+                description: 'Traumatized'
+            }
+        }
+
+        const [pet, created] = await db.pet.findOrCreate(options)
+
+        const user = await db.user.findOne({
+            where: {
+                firstName: 'Weston'
+            }
+        })
+
+        await user.addPet(pet)
+        console.log(`user ${user.firstName} is the owner of ${pet.name}`)
+    } catch(error) {
+        console.warn(error)
+    }
+}
+
+// eager loading. query the db one time -- includes parent record. 
+
+async function eagerBeaver() {
+    try {
+      // find everyone!
+      const users = await db.user.findAll({
+        // includes any records of pet, array so we can for each.
+        include: [db.pet]
+      })
+      // users will have a .pets key with an array of pets
+      users.forEach(user=>{
+        console.log(`${user.firstName}'s pets:`)
+        // nested forEach! 
+        user.pets.forEach(pet=>{
+            console.log(pet.name)
+        })
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  eagerBeaver()

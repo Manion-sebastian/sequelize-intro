@@ -11,3 +11,34 @@ note: generate models with a SINGULAR name
 this command will make the table.
 
 sequelize model:create --name user --attributes firstName:string,lastName:string,age:integer,email:string
+
+
+database can have one or many tables, one table has many column, one row in a table is called a record. 'sql doesnt allow arrays, only strings/numbers'
+
+parent/child relationship
+-- parent owns the child, but the child that holds the reference to the parent
+one class has many students
+table Class:
+- id -done for you-
+- name
+- instructor
+- topics 
+- dates 
+- student id
+
+table Students: 
+- id -done for you-
+- name
+- enrolled
+- email address
+
+one team would have many players
+
+DATABASE GUIDELINES: 
+- lowercase
+- singular 
+- underscores not dashes
+
+when creating a table that will reference another table use parentId
+
+sequelize model:create --name pet --attributes name:string,species:string,description:text,userId:integer
